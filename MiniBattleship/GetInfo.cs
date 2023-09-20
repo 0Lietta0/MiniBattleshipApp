@@ -82,9 +82,9 @@ namespace MiniBattleship
             return positionOnTheGrid;
 
         }
-        public static (string[], string[]) GetPositionOfTheShips(string[] playerGrid, int numberOfShips)
+        public static (string[], List<string>) GetPositionOfTheShips(string[] playerGrid, int numberOfShips)
         {
-            string[] shipsPositions = new string[numberOfShips];
+            List<string> shipsPositions = new List<string>();
 
             for (int i = 0; i < numberOfShips; i++)
             {
@@ -94,10 +94,10 @@ namespace MiniBattleship
                 BattleshipLogic.PrintGrid(playerGrid);
                 shipPosition = GetPositionOnTheGrid(playerGrid);
                 playerGrid = BattleshipLogic.GridUpdate(playerGrid, shipPosition, "x ");
-                shipsPositions[i] = shipPosition;
+                shipsPositions.Add(shipPosition);
             }
 
-            return (shipsPositions, playerGrid);
+            return (playerGrid, shipsPositions);
         }
     }
 }

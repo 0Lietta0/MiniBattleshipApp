@@ -68,7 +68,7 @@ namespace MiniBattleship
             return newGrid;
         }
 
-        public static string[] ShootShip(string[] playerShotsGrid, string[] opponentShipsPositions)
+        public static List<string> ShootShip(string[] playerShotsGrid, List<string> playerShotsPositions, List<string> opponentShipsPositions)
         {
             Console.Clear();
 
@@ -79,13 +79,26 @@ namespace MiniBattleship
             {
                 GridUpdate(playerShotsGrid, shotPosition, "x ");
                 Console.WriteLine("Congartulations! One ship is down.");
+                playerShotsPositions.Add(shotPosition);
             }
             else
             {
+                GridUpdate(playerShotsGrid, shotPosition, "~ ");
                 Console.WriteLine("You missed.");
             }
 
-            return playerShotsGrid;
+            PressEnterToContinue();
+
+            return playerShotsPositions;
+        }
+
+        public static bool WinCheck(List<string> playerShotsPositions)
+        {
+            if(playerShotsPositions.Count == 5)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

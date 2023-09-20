@@ -4,12 +4,14 @@ using System.Text;
 
 int numberOfShips = 5;
 string[] battlefieldGrid = new string[25];
-string[] player1ShipPositions = new string[5];
-string[] player2ShipPositions = new string[5];
+List<string> player1ShipsPositions = new List<string>();
+List<string> player2ShipsPositions = new List<string>();
 string[] player1Battlefield = new string[25];
 string[] player2Battlefield = new string[25];
 string[] player1ShotsGrid = new string[25];
 string[] player2ShotsGrid = new string[25];
+List<string> player1ShotsPositions = new List<string>();
+List<string> player2ShotsPositions = new List<string>();
 
 //not used only for now!
 //Messages.WelcomeMessage();
@@ -24,44 +26,31 @@ player1Battlefield = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 player2Battlefield = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 
 Messages.PlayerTurnMessage(player1);
-(player1ShipPositions, player1Battlefield)  = GetInfo.GetPositionOfTheShips(player1Battlefield, numberOfShips);
+(player1Battlefield, player1ShipsPositions)  = GetInfo.GetPositionOfTheShips(player1Battlefield, numberOfShips);
 Messages.PlayerBattlefield(player1Battlefield);
 
 Messages.PlayerTurnMessage(player2);
-(player2ShipPositions, player2Battlefield) = GetInfo.GetPositionOfTheShips(player2Battlefield, numberOfShips);
+(player2Battlefield, player2ShipsPositions) = GetInfo.GetPositionOfTheShips(player2Battlefield, numberOfShips);
 Messages.PlayerBattlefield(player2Battlefield);
 
 //Shooting ships
 player1ShotsGrid = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 player2ShotsGrid = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 
-bool playerWins = false;
 do
 {
-	Messages.PlayerTurnMessage(player1);
-	BattleshipLogic.ShootShip(player1ShotsGrid,player2ShipPositions);
-	Console.ReadLine();
+		Messages.PlayerTurnMessage(player1);
+        BattleshipLogic.ShootShip(player1ShotsGrid, player1ShotsPositions, player2ShipsPositions);
+		if (BattleshipLogic.WinCheck(player1ShotsPositions) == true)
+		{
+		break;
+		}
+
+		Messages.PlayerTurnMessage(player2);
+		BattleshipLogic.ShootShip(player2ShotsGrid, player2ShotsPositions, player1ShipsPositions);
+
+} while (BattleshipLogic.WinCheck(player2ShotsPositions) == false);
 
 
-} while (playerWins == false);
-
-//    do
-//    {
-//        Turns(max 25)
-//    player 1 choose
-//    Print grid
-//    if (right)
-//        {
-//            ship sinks
-//    Change the place to X
-//    }
-//        else
-//        {
-//            change the place to -
-//            the end of round
-//        }
-//        pleyer2 choose...
-//}
-//    while (players1AllShipsSinked == false && players2AllShipsSinked == false)
 
 //WinMessage(); +thanks for playing
