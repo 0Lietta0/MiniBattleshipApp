@@ -75,6 +75,7 @@ namespace MiniBattleship
                         positionOnTheGrid = "";
                         Console.WriteLine("This position does not exist on the battlefield or is already occupied. " +
                             "Choose one of the A1-E5 positions currently shown on the screen.");
+                        Console.WriteLine();
                     }
                 }
             } while (isValidPlace == false || positionOnTheGrid == "");
@@ -92,6 +93,7 @@ namespace MiniBattleship
                 Console.Clear();
                 Messages.PlaceShipsMessage(numberOfShips - i);
                 BattleshipLogic.PrintGrid(playerGrid);
+                Console.WriteLine();
                 shipPosition = GetPositionOnTheGrid(playerGrid);
                 playerGrid = BattleshipLogic.GridUpdate(playerGrid, shipPosition, "x ");
                 shipsPositions.Add(shipPosition);

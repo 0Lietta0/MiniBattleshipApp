@@ -74,16 +74,19 @@ namespace MiniBattleship
 
             Messages.ShootShipMessage();
             PrintGrid(playerShotsGrid);
+            Console.WriteLine();
             string shotPosition = GetInfo.GetPositionOnTheGrid(playerShotsGrid);
             if (opponentShipsPositions.Contains(shotPosition))
             {
                 GridUpdate(playerShotsGrid, shotPosition, "x ");
+                Console.WriteLine();
                 Console.WriteLine("Congartulations! One ship is down.");
                 playerShotsPositions.Add(shotPosition);
             }
             else
             {
                 GridUpdate(playerShotsGrid, shotPosition, "~ ");
+                Console.WriteLine();
                 Console.WriteLine("You missed.");
             }
 
