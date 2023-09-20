@@ -16,6 +16,7 @@ namespace MiniBattleship
             Console.WriteLine("Press enter to continue.");
             Console.ReadLine();
         }
+
         public static string[] MakeBattlefieldGrid()
         {
             string[] grid = new string[25];
@@ -60,5 +61,31 @@ namespace MiniBattleship
             return grid;
         }
 
+        public static string[] CopyBattlefield(string[] battlefieldGrid)
+        {
+            string[] newGrid = new string[25];
+            Array.Copy(battlefieldGrid, newGrid, 25);
+            return newGrid;
+        }
+
+        public static string[] ShootShip(string[] playerShotsGrid, string[] opponentShipsPositions)
+        {
+            Console.Clear();
+
+            Messages.ShootShipMessage();
+            PrintGrid(playerShotsGrid);
+            string shotPosition = GetInfo.GetPositionOnTheGrid(playerShotsGrid);
+            if (opponentShipsPositions.Contains(shotPosition))
+            {
+                GridUpdate(playerShotsGrid, shotPosition, "x ");
+                Console.WriteLine("Congartulations! One ship is down.");
+            }
+            else
+            {
+                Console.WriteLine("You missed.");
+            }
+
+            return playerShotsGrid;
+        }
     }
 }

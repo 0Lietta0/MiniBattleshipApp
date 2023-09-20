@@ -19,6 +19,13 @@ namespace MiniBattleship
             Console.WriteLine("Get ready to fight!");
             BattleshipLogic.PressEnterToContinue();
         }
+
+        public static void PlayerTurnMessage(string player)
+        {
+            Console.Clear();
+            Console.WriteLine($"It's {player}'s turn.");
+            BattleshipLogic.PressEnterToContinue();
+        }
         public static void PlaceShipsMessage(int numberOfShips)
         {
             Console.WriteLine($"You have {numberOfShips} ships left");
@@ -32,6 +39,12 @@ namespace MiniBattleship
             Console.WriteLine();
             BattleshipLogic.PrintGrid(playerBattlefield);
             BattleshipLogic.PressEnterToContinue();
+        }
+
+        public static void ShootShipMessage()
+        {
+            Console.WriteLine("Try to sink one of your opponents ships!");
+            Console.WriteLine("Choose A1-E5 position to shoot:");
         }
 
         public static void WinMessage(string winningPlayer)

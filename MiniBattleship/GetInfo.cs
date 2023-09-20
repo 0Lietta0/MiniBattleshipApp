@@ -46,6 +46,8 @@ namespace MiniBattleship
                 }
             } while (isValidName == false);
 
+            BattleshipLogic.PressEnterToContinue();
+
             return (player1, player2);
 
         }
@@ -80,11 +82,9 @@ namespace MiniBattleship
             return positionOnTheGrid;
 
         }
-        public static (string[], string[]) GetPositionOfTheShips(string[] battlefieldGrid, int numberOfShips)
+        public static (string[], string[]) GetPositionOfTheShips(string[] playerGrid, int numberOfShips)
         {
             string[] shipsPositions = new string[numberOfShips];
-            string[] playerGrid = new string[25];
-            Array.Copy(battlefieldGrid, playerGrid,25);
 
             for (int i = 0; i < numberOfShips; i++)
             {
