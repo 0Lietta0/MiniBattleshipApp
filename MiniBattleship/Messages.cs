@@ -29,6 +29,8 @@ namespace MiniBattleship
         }
         public static void PlaceShipsMessage(int numberOfShips)
         {
+            Console.WriteLine("It's time to place your ships on the battlefield!");
+            Console.WriteLine();
             Console.WriteLine($"You have {numberOfShips} ships left");
             Console.WriteLine("Where would you like to place your ship? (A1-E5): ");
             Console.WriteLine();
