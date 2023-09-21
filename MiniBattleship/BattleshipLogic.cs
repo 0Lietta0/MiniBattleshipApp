@@ -17,58 +17,60 @@ namespace MiniBattleship
             Console.ReadLine();
         }
 
-        public static string[] MakeBattlefieldGrid()
+        public static string[,] MakeBattlefieldGrid()
         {
-            string[] grid = new string[25];
+            string[,] grid = new string[5, 5];
             string[] rows = { "A", "B", "C", "D", "E" };
-            int numberInArray = 0;
-            int numberOfColumns = 5;
-            foreach (string row in rows)
+
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                for (int i = 1; i <= numberOfColumns; i++)
+                for (int j = 1 ; j <= grid.GetLength(1); j++)
                 {
-                    string gridBox = $"{row}{i}";
-                    grid[numberInArray] = gridBox;
-                    numberInArray++;
+                    grid[i, j-1] = $"{rows[i]}{j}";
                 }
             }
 
             return grid;
         }
 
-        public static void PrintGrid(string[] grid)
+        public static void PrintGrid(string[,] grid)
         {
-            int numberOfColumns = 5;
-
-            string rowA = string.Join(" ", grid, 0, numberOfColumns);
-            string rowB = string.Join(" ", grid, numberOfColumns, numberOfColumns);
-            string rowC = string.Join(" ", grid, numberOfColumns * 2, numberOfColumns);
-            string rowD = string.Join(" ", grid, numberOfColumns * 3, numberOfColumns);
-            string rowE = string.Join(" ", grid, numberOfColumns * 4, numberOfColumns);
-
-            Console.WriteLine(rowA);
-            Console.WriteLine(rowB);
-            Console.WriteLine(rowC);
-            Console.WriteLine(rowD);
-            Console.WriteLine(rowE);
+            for(int i = 0; i < grid.GetLength(0); i++)
+            {
+                for(int j = 0; j < grid.GetLength(1); j++)
+                {
+                    Console.Write($"{grid[i,j]} ");
+                }
+                Console.WriteLine();
+            }
         }
 
-        public static string[] GridUpdate(string[] grid, string positionOnTheGrid, string changedValue)
+        public static string[,] GridUpdate(string[,] grid, string positionOnTheGrid, string changedValue)
         {
-            int indexOfSelectedPosition = Array.IndexOf(grid, positionOnTheGrid);
-            grid[indexOfSelectedPosition] = changedValue;
+            for ( int i = 0; i < grid.GetLength(0); i++)
+            { 
+                for(int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (grid[i,j] == positionOnTheGrid)
+                    {
+                        grid[i,j] = changedValue;
+                    }
+                }
+                    
+            }
 
             return grid;
         }
 
-        public static string[] CopyBattlefield(string[] battlefieldGrid)
+        public static string[,] CopyBattlefield(string[,] battlefieldGrid)
         {
-            string[] newGrid = new string[25];
+            string[,] newGrid = new string[5, 5];
             Array.Copy(battlefieldGrid, newGrid, 25);
+
             return newGrid;
         }
 
-        public static List<string> ShootShip(string[] playerShotsGrid, List<string> playerShotsPositions, List<string> opponentShipsPositions)
+        public static List<string> ShootShip(string[,] playerShotsGrid, List<string> playerShotsPositions, List<string> opponentShipsPositions)
         {
             Console.Clear();
 

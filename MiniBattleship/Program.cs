@@ -4,56 +4,58 @@ using System.Data;
 using System.Text;
 
 int numberOfShips = 5;
-string[] battlefieldGrid = new string[25];
+string[,] battlefieldGrid = new string[5, 5];
 List<string> player1ShipsPositions = new List<string>();
 List<string> player2ShipsPositions = new List<string>();
-string[] player1Battlefield = new string[25];
-string[] player2Battlefield = new string[25];
-string[] player1ShotsGrid = new string[25];
-string[] player2ShotsGrid = new string[25];
+string[,] player1Battlefield = new string[5, 5];
+string[,] player2Battlefield = new string[5, 5];
+string[,] player1ShotsGrid = new string[5, 5];
+string[,] player2ShotsGrid = new string[5, 5];
 List<string> player1ShotsPositions = new List<string>();
 List<string> player2ShotsPositions = new List<string>();
 
 ////not used only for now!
-////Messages.WelcomeMessage();
+Messages.WelcomeMessage();
 
-//(string player1, string player2) = GetInfo.GetPlayersNames();
+(string player1, string player2) = GetInfo.GetPlayersNames();
 
 //Making basic battlefield
 battlefieldGrid = BattleshipLogic.MakeBattlefieldGrid();
 
 ////Making players battlefields
-//player1Battlefield = BattleshipLogic.CopyBattlefield(battlefieldGrid);
-//player2Battlefield = BattleshipLogic.CopyBattlefield(battlefieldGrid);
+player1Battlefield = BattleshipLogic.CopyBattlefield(battlefieldGrid);
+player2Battlefield = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 
-//Messages.PlayerTurnMessage(player1);
-//(player1Battlefield, player1ShipsPositions) = GetInfo.GetPositionOfTheShips(player1Battlefield, numberOfShips);
-//Messages.PlayerBattlefield(player1Battlefield);
+Messages.PlayerTurnMessage(player1);
+(player1Battlefield, player1ShipsPositions) = GetInfo.GetPositionOfTheShips(player1Battlefield, numberOfShips);
+Messages.PlayerBattlefield(player1Battlefield);
 
-//Messages.PlayerTurnMessage(player2);
-//(player2Battlefield, player2ShipsPositions) = GetInfo.GetPositionOfTheShips(player2Battlefield, numberOfShips);
-//Messages.PlayerBattlefield(player2Battlefield);
+Messages.PlayerTurnMessage(player2);
+(player2Battlefield, player2ShipsPositions) = GetInfo.GetPositionOfTheShips(player2Battlefield, numberOfShips);
+Messages.PlayerBattlefield(player2Battlefield);
 
 ////Shooting ships
 player1ShotsGrid = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 player2ShotsGrid = BattleshipLogic.CopyBattlefield(battlefieldGrid);
 string winningPlayer = "";
 
-string player1 = "Steve";
-string player2 = "Bob";
 
+//For testing only
 
-player1ShipsPositions.Add("A1");
-player1ShipsPositions.Add("A2");
-player1ShipsPositions.Add("A3");
-player1ShipsPositions.Add("A4");
-player1ShipsPositions.Add("A5");
+//string player1 = "Steve";
+//string player2 = "Bob";
 
-player2ShipsPositions.Add("A1");
-player2ShipsPositions.Add("A2");
-player2ShipsPositions.Add("A3");
-player2ShipsPositions.Add("A4");
-player2ShipsPositions.Add("A5");
+//player1ShipsPositions.Add("A1");
+//player1ShipsPositions.Add("A2");
+//player1ShipsPositions.Add("A3");
+//player1ShipsPositions.Add("A4");
+//player1ShipsPositions.Add("A5");
+
+//player2ShipsPositions.Add("A1");
+//player2ShipsPositions.Add("A2");
+//player2ShipsPositions.Add("A3");
+//player2ShipsPositions.Add("A4");
+//player2ShipsPositions.Add("A5");
 
 
 do
@@ -68,7 +70,7 @@ do
 
     Messages.PlayerTurnMessage(player2);
     BattleshipLogic.ShootShip(player2ShotsGrid, player2ShotsPositions, player1ShipsPositions);
-    if (BattleshipLogic.WinCheck(player1ShotsPositions) == true)
+    if (BattleshipLogic.WinCheck(player2ShotsPositions) == true)
     {
         winningPlayer = $"{player2}";
         break;

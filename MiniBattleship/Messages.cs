@@ -12,8 +12,9 @@ namespace MiniBattleship
         public static void WelcomeMessage()
         {
             Console.WriteLine("Welcome to the MiniBattleShipApp!");
+            Console.WriteLine();
             Console.WriteLine("You will be fighting each other to win the game.");
-            Console.WriteLine("When you shoot every ship of your oponent you win");
+            Console.WriteLine("When you shoot every ship of your oponent you win.");
             Console.WriteLine("When all of your ships are shoot you lose.");
             Console.WriteLine();
             Console.WriteLine("Get ready to fight!");
@@ -33,7 +34,7 @@ namespace MiniBattleship
             Console.WriteLine();
         }
 
-        public static void PlayerBattlefield(string[] playerBattlefield)
+        public static void PlayerBattlefield(string[,] playerBattlefield)
         {
             Console.Clear();
             Console.WriteLine("Your final battlefield looks like this:");

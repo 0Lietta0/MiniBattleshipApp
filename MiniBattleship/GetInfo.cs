@@ -51,7 +51,7 @@ namespace MiniBattleship
             return (player1, player2);
 
         }
-        public static string GetPositionOnTheGrid(string[] grid)
+        public static string GetPositionOnTheGrid(string[,] grid)
         {
             string? readResult = "";
             bool isValidPlace = false;
@@ -67,10 +67,24 @@ namespace MiniBattleship
                 }
                 else
                 {
-                    isValidPlace = true;
                     positionOnTheGrid = readResult.Trim().ToUpper();
 
-                    if (grid.Contains(positionOnTheGrid) == false)
+                    for (int i = 0; i < grid.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < grid.GetLength(1); j++)
+                        {
+                            if (grid[i, j] != positionOnTheGrid)
+                            {
+                                isValidPlace = false;
+                            }
+                            else
+                            {
+                                isValidPlace = true;
+                                return positionOnTheGrid;
+                            }
+                        }
+                    }
+                    if (isValidPlace == false)
                     {
                         positionOnTheGrid = "";
                         Console.WriteLine("This position does not exist on the battlefield or is already occupied. " +
@@ -83,23 +97,23 @@ namespace MiniBattleship
             return positionOnTheGrid;
 
         }
-        public static (string[], List<string>) GetPositionOfTheShips(string[] playerGrid, int numberOfShips)
+    public static (string[,], List<string>) GetPositionOfTheShips(string[,] playerGrid, int numberOfShips)
+    {
+        List<string> shipsPositions = new List<string>();
+
+        for (int i = 0; i < numberOfShips; i++)
         {
-            List<string> shipsPositions = new List<string>();
-
-            for (int i = 0; i < numberOfShips; i++)
-            {
-                string shipPosition = "";
-                Console.Clear();
-                Messages.PlaceShipsMessage(numberOfShips - i);
-                BattleshipLogic.PrintGrid(playerGrid);
-                Console.WriteLine();
-                shipPosition = GetPositionOnTheGrid(playerGrid);
-                playerGrid = BattleshipLogic.GridUpdate(playerGrid, shipPosition, "x ");
-                shipsPositions.Add(shipPosition);
-            }
-
-            return (playerGrid, shipsPositions);
+            string shipPosition = "";
+            Console.Clear();
+            Messages.PlaceShipsMessage(numberOfShips - i);
+            BattleshipLogic.PrintGrid(playerGrid);
+            Console.WriteLine();
+            shipPosition = GetPositionOnTheGrid(playerGrid);
+            playerGrid = BattleshipLogic.GridUpdate(playerGrid, shipPosition, "x ");
+            shipsPositions.Add(shipPosition);
         }
+
+        return (playerGrid, shipsPositions);
     }
+}
 }
