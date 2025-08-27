@@ -4,4 +4,4 @@ all of your opponent's ships.
 
 Learning objective: making a complex project.
 
-Part of Tim Corey's C# Mastercourse projects.
+Based on requirements from Tim Corey's C# Mastercourse.
